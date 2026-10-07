@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111318">
+<title>Crypto Analyzer</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0e1014;color:#f5f5f5;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:560px;margin:auto;min-height:100vh;padding-bottom:80px}
+header{padding:18px;border-bottom:1px solid #292d34;position:sticky;top:0;background:#0e1014ee;backdrop-filter:blur(10px)}
+main{padding:16px}.brand{font-size:21px;font-weight:800}.muted{color:#9ba1aa;font-size:12px}
+.card{background:#181b20;border:1px solid #2a2f37;border-radius:18px;padding:16px;margin-bottom:14px}
+.money{font-size:29px;font-weight:800;margin:5px 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{background:#20242a;border-radius:12px;padding:11px}.mini b{display:block;margin-top:4px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.btn{padding:14px;border:0;border-radius:13px;font-weight:800;cursor:pointer}
+.primary{background:#39c77a;color:#07140d}.secondary{background:#20242a;color:#fff;border:1px solid #303640}
+.coin{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#20242a;border-radius:13px;margin:8px 0}
+.left{display:flex;gap:10px;align-items:center}.icon{width:34px;height:34px;border-radius:50%;background:#303641;display:grid;place-items:center;font-weight:800}
+.green{color:#39c77a}.yellow{color:#f2c94c}.red{color:#ef5350}
+.upload{text-align:center;border:1px dashed #4a515d;padding:18px;border-radius:15px}
+input{display:none}.preview{display:none;width:100%;max-height:350px;object-fit:contain;margin-top:12px;border-radius:10px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #292d34;font-size:13px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#191c21;border-top:1px solid #292d34}
+.nav{max-width:560px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
+nav button{background:none;border:0;color:#aeb3bb;padding:10px;font-size:11px}
+.navicon{display:block;font-size:19px;margin-bottom:3px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures • V1</div></header>
+<main>
+<div class="card">
+<div class="muted">Modal trading</div><div class="money">Rp5.000.000</div>
+<div class="grid"><div class="mini"><span class="muted">Target bulan</span><b>Rp5.000.000</b></div>
+<div class="mini"><span class="muted">Batas rugi/hari</span><b>Rp50.000</b></div></div>
+</div>
+<div class="actions">
+<button class="btn primary" id="scan">🔎 Scan Market</button>
+<button class="btn secondary" id="pick">📸 Analisis Screenshot</button>
+</div>
+<div class="card"><div style="display:flex;justify-content:space-between"><b>⭐ Coin untuk Dipantau</b><span class="muted" id="status">Belum scan</span></div>
+<div id="watch"><div class="muted" style="margin-top:12px">Tekan Scan Market untuk melihat kandidat.</div></div></div>
+<div class="card"><b>📸 Screenshot Analyzer</b><div class="upload" style="margin-top:10px">
+<label for="file" class="btn secondary">Pilih Screenshot Pintu</label><input id="file" type="file" accept="image/*">
+<img id="preview" class="preview">
+<div class="muted" style="margin-top:9px">V1: upload dan preview dulu. AI Cloud, harga live, berita, dan scanner real akan kita sambungkan setelah fondasi berhasil.</div>
+</div></div>
+<div class="card"><b>🧠 Hasil Analisis</b>
+<div class="muted" style="margin-top:10px">BTC/IDR • 15m</div><div class="yellow" style="font-size:22px;font-weight:900;margin:4px 0 10px">🟡 WAIT</div>
+<div class="row"><span>Trend</span><b>Menunggu data</b></div><div class="row"><span>Support</span><b>—</b></div><div class="row"><span>Resistance</span><b>—</b></div><div class="row"><span>Pilihan</span><b>Spot / Futures / No Trade</b></div>
+<div class="muted" style="margin-top:10px">Ini hanya tampilan awal, bukan sinyal trading.</div></div>
+</main>
+<nav><div class="nav"><button>⌂<br>Beranda</button><button>◉<br>Scan</button><button>▣<br>Riwayat</button><button>⚙<br>Pengaturan</button></div></nav>
+</div>
+<script>
+const coins=[["BTC","Bitcoin",88,"green"],["ETH","Ethereum",84,"green"],["SOL","Solana",81,"green"],["XRP","XRP",76,"yellow"],["BNB","BNB",72,"yellow"]];
+document.getElementById("scan").onclick=()=>{document.getElementById("watch").innerHTML=coins.map(c=>`<div class="coin"><div class="left"><div class="icon">${c[0][0]}</div><div><b>${c[0]}</b><div class="muted">${c[1]} • kandidat pantauan</div></div></div><b class="${c[3]}">${c[2]}/100</b></div>`).join("");document.getElementById("status").textContent="Demo lokal"};
+document.getElementById("pick").onclick=()=>document.getElementById("file").click();
+document.getElementById("file").onchange=e=>{const f=e.target.files[0];if(!f)return;const p=document.getElementById("preview");p.src=URL.createObjectURL(f);p.style.display="block"};
+</script>
+</body></html>
