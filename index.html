@@ -1,130 +1,138 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e1014">
-<title>Crypto Analyzer V2.1</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V3</title>
 <style>
-:root{--bg:#0e1014;--card:#181b20;--card2:#20242a;--line:#303640;--text:#f5f6f7;--muted:#9da4ae;--green:#39c77a;--yellow:#f2c94c;--red:#ef5350}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select{font:inherit}.app{max-width:620px;margin:auto;min-height:100vh;padding-bottom:82px}
-header{position:sticky;top:0;z-index:10;padding:14px 16px;background:#0e1014f2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
-.brand{font-size:20px;font-weight:850}.muted{font-size:12px;color:var(--muted)}
+:root{--bg:#0e1014;--card:#181b20;--card2:#20242a;--line:#303640;--text:#f5f6f7;--muted:#9da4ae;--green:#39c77a;--yellow:#f2c94c;--red:#ef5350;--blue:#8f9aff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}.app{max-width:640px;margin:auto;min-height:100vh;padding-bottom:82px}
+header{position:sticky;top:0;z-index:20;padding:14px 16px;background:#0e1014f2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:20px;font-weight:850}.muted{font-size:12px;color:var(--muted)}.badge{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:6px 8px}
 main{padding:14px}.page{display:none}.page.active{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:13px}
-.hero{background:linear-gradient(145deg,#1b2230,#181b20)}.money{font-size:30px;font-weight:850;margin:4px 0 14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mini{background:#20242a;border-radius:12px;padding:10px}.mini b{display:block;margin-top:3px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}.btn{border:0;border-radius:13px;padding:13px 10px;font-weight:800;cursor:pointer}
-.primary{background:var(--green);color:#06130c}.secondary{background:var(--card2);color:#fff;border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:13px}.hero{background:linear-gradient(145deg,#1b2230,#181b20)}
+.money{font-size:30px;font-weight:850;margin:4px 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mini{background:#20242a;border-radius:12px;padding:10px}.mini b{display:block;margin-top:3px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}.btn{border:0;border-radius:13px;padding:13px 10px;font-weight:800;cursor:pointer}.primary{background:var(--green);color:#06130c}.secondary{background:var(--card2);color:#fff;border:1px solid var(--line)}.danger{background:#3a2022;color:#ff9a97;border:1px solid #5b2c2e}
 .title{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.title b{font-size:16px}
-.coin{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:11px;border-radius:13px;margin:7px 0}
-.left{display:flex;align-items:center;gap:10px}.icon{width:35px;height:35px;border-radius:50%;background:#303641;display:grid;place-items:center;font-weight:850}
-.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}
-.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border-bottom:0}
-.empty{text-align:center;color:var(--muted);padding:18px}
-.field{margin:9px 0}.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}
-input,select{width:100%;background:#111419;color:#fff;border:1px solid #3a4049;border-radius:11px;padding:11px;outline:none}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.upload{border:1px dashed #4b535f;border-radius:15px;padding:16px;text-align:center}.upload input{display:none}
-.preview{display:none;width:100%;max-height:360px;object-fit:contain;border-radius:10px;margin-top:12px}
-.decision{font-size:24px;font-weight:900;margin:6px 0 12px}.notice{font-size:11px;color:var(--muted);line-height:1.5;margin-top:9px}
+.coin{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:11px;border-radius:13px;margin:7px 0}.left{display:flex;align-items:center;gap:10px}.icon{width:35px;height:35px;border-radius:50%;background:#303641;display:grid;place-items:center;font-weight:850}.score{text-align:right;font-weight:850}
+.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border-bottom:0}
+.field{margin:9px 0}.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}input,select{width:100%;background:#111419;color:#fff;border:1px solid #3a4049;border-radius:11px;padding:11px;outline:none}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.notice{font-size:11px;line-height:1.5;color:var(--muted);margin-top:9px}.empty{text-align:center;color:var(--muted);padding:18px}
+.news{padding:11px 0;border-bottom:1px solid var(--line)}.news:last-child{border-bottom:0}.news a{color:#fff;text-decoration:none;font-weight:700;font-size:13px}.news small{display:block;color:var(--muted);margin-top:4px}
+.upload{border:1px dashed #4b535f;border-radius:15px;padding:16px;text-align:center}.upload input{display:none}.preview{display:none;width:100%;max-height:360px;object-fit:contain;border-radius:10px;margin-top:12px}
+.decision{font-size:24px;font-weight:900;margin:6px 0 12px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border-top:1px solid var(--line)}.nav{max-width:640px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.nav button{appearance:none;background:transparent;border:0;color:#aeb4bd;padding:9px 2px 10px;cursor:pointer;touch-action:manipulation}.nav button.active{color:#fff}.navicon{display:block;font-size:18px;line-height:20px;margin-bottom:2px}
 .history{background:var(--card2);padding:12px;border-radius:13px;margin:7px 0}
-nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border-top:1px solid var(--line)}
-.nav{max-width:620px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.nav button{appearance:none;-webkit-appearance:none;background:transparent!important;border:0!important;outline:0;color:#aeb4bd;padding:10px 2px 11px;cursor:pointer;touch-action:manipulation;pointer-events:auto}
-.nav button.active{color:#fff}.navicon{display:block;font-size:18px;line-height:20px;margin-bottom:2px}
 @media(min-width:700px){body{padding:0 10px}.app{box-shadow:0 0 60px #000}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures • V2.1</div></header>
+<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V3 • ONLINE</div></div></header>
 <main>
 <section class="page active" data-page="home">
 <div class="card hero"><div class="muted">Modal trading</div><div class="money" id="capitalText">Rp5.000.000</div><div class="grid"><div class="mini"><span class="muted">Target bulan</span><b id="targetText">Rp5.000.000</b></div><div class="mini"><span class="muted">Batas rugi/hari</span><b id="lossText">Rp50.000</b></div></div></div>
-<div class="actions"><button class="btn primary" id="scanBtn">🔎 Scan Market</button><button class="btn secondary" id="analyzeBtn">📸 Screenshot</button></div>
-<div class="card"><div class="title"><b>⭐ Coin untuk Dipantau</b><span class="muted" id="scanStatus">Belum scan</span></div><div id="watch"><div class="empty">Tekan Scan Market untuk melihat kandidat.</div></div></div>
-<div class="card"><div class="title"><b>🛡️ Daily Guard</b><b class="yellow" id="guard">SIAP</b></div><div class="row"><span>Profit hari ini</span><b id="profitToday">Rp0</b></div><div class="row"><span>Batas rugi</span><b id="lossGuard">Rp50.000</b></div><div class="notice">Jika batas rugi tercapai, aplikasi menyarankan berhenti membuka trade baru.</div></div>
+<div class="actions"><button class="btn primary" id="scanBtn">🔎 Scan Market</button><button class="btn secondary" id="newsBtn">📰 Berita</button></div>
+<div class="card"><div class="title"><b>⭐ Coin untuk Dipantau</b><span class="muted" id="scanStatus">Belum scan</span></div><div id="watch"><div class="empty">Masukkan API key gratis di Pengaturan, lalu Scan Market.</div></div></div>
+<div class="card"><div class="title"><b>📰 Berita terbaru</b><span class="muted" id="newsStatus">Belum dimuat</span></div><div id="news"><div class="empty">Tekan Berita untuk memuat berita.</div></div></div>
+<div class="card"><div class="title"><b>🛡️ Daily Guard</b><b class="yellow" id="guard">SIAP</b></div><div class="row"><span>Profit hari ini</span><b id="profitToday">Rp0</b></div><div class="row"><span>Batas rugi</span><b id="lossGuard">Rp50.000</b></div></div>
 </section>
 
 <section class="page" data-page="analyze">
-<div class="card"><div class="title"><b>📸 Screenshot Analyzer</b><span class="muted">Pintu</span></div><div class="upload"><label for="shot" class="btn secondary">Pilih Screenshot Pintu</label><input id="shot" type="file" accept="image/*"><img id="preview" class="preview"><div class="notice">Pastikan pair, timeframe, harga dan chart terlihat. AI Cloud akan ditambahkan setelah fondasi ini stabil.</div></div></div>
+<div class="card"><div class="title"><b>📸 Screenshot Analyzer</b><span class="muted">Pintu</span></div><div class="upload"><label for="shot" class="btn secondary">Pilih Screenshot Pintu</label><input id="shot" type="file" accept="image/*"><img id="preview" class="preview"><div class="notice">Pastikan pair, timeframe, harga dan chart terlihat. AI Cloud akan masuk setelah koneksi dasar stabil.</div></div></div>
 <div class="card"><b>🧠 Analisis awal</b><div class="formgrid"><div class="field"><label>Market</label><select id="market"><option>Spot</option><option>Futures</option></select></div><div class="field"><label>Timeframe</label><select id="tf"><option>15m</option><option>1m</option><option>1H</option><option>4H</option><option>1D</option></select></div></div><div class="formgrid"><div class="field"><label>Trend</label><select id="trend"><option>Sideways</option><option>Bullish</option><option>Bearish</option></select></div><div class="field"><label>Volume</label><select id="volume"><option>Normal</option><option>Meningkat</option><option>Menurun</option></select></div></div><button class="btn primary" id="ruleBtn" style="width:100%">🧠 Jalankan Analisis</button></div>
 <div class="card"><b>Hasil Analisis</b><div id="result"><div class="decision yellow">🟡 WAIT</div><div class="muted">Belum ada analisis.</div></div></div>
 </section>
 
 <section class="page" data-page="portfolio">
-<div class="card"><b>💼 Portfolio</b><div class="row"><span>Modal awal</span><b id="pCapital">Rp5.000.000</b></div><div class="row"><span>Profit hari ini</span><b id="pProfit">Rp0</b></div><div class="row"><span>Target bulanan</span><b id="pTarget">Rp5.000.000</b></div><div class="notice">Data V2.1 disimpan di browser perangkat ini.</div></div>
+<div class="card"><b>💼 Portfolio</b><div class="row"><span>Modal awal</span><b id="pCapital">Rp5.000.000</b></div><div class="row"><span>Profit hari ini</span><b id="pProfit">Rp0</b></div><div class="row"><span>Target bulanan</span><b id="pTarget">Rp5.000.000</b></div></div>
 <div class="card"><b>➕ Catat hasil trade</b><div class="formgrid"><div class="field"><label>Coin</label><input id="tradeCoin" placeholder="BTC"></div><div class="field"><label>Profit/Loss bersih (Rp)</label><input id="tradeResult" type="number" placeholder="50000"></div></div><button class="btn primary" id="saveTrade">Simpan Trade</button></div>
-<div class="card"><div class="title"><b>📜 Riwayat Trade</b><button class="btn secondary" id="clearHistory" style="padding:7px 9px;font-size:11px">Hapus</button></div><div id="history"></div></div>
+<div class="card"><div class="title"><b>📜 Riwayat</b><button class="btn secondary" id="clearHistory" style="padding:7px 9px;font-size:11px">Hapus</button></div><div id="history"></div></div>
 </section>
 
 <section class="page" data-page="settings">
-<div class="card"><b>⚙️ Pengaturan</b><div class="field"><label>Modal awal (Rp)</label><input id="capitalInput" type="number"></div><div class="field"><label>Target bulanan (Rp)</label><input id="targetInput" type="number"></div><div class="field"><label>Batas rugi harian (Rp)</label><input id="lossInput" type="number"></div><button class="btn primary" id="saveSettings" style="width:100%">Simpan Pengaturan</button></div>
-<div class="card"><b>🔐 Privasi</b><div class="row"><span>AI Cloud</span><b>Belum aktif</b></div><div class="row"><span>API Key</span><b>Belum dipasang</b></div><div class="notice">API key rahasia tidak boleh dimasukkan ke GitHub Pages. Nanti kita gunakan backend untuk bagian tersebut.</div></div>
+<div class="card"><b>⚙️ Pengaturan</b>
+<div class="field"><label>Modal awal (Rp)</label><input id="capitalInput" type="number"></div><div class="field"><label>Target bulanan (Rp)</label><input id="targetInput" type="number"></div><div class="field"><label>Batas rugi harian (Rp)</label><input id="lossInput" type="number"></div><button class="btn primary" id="saveSettings" style="width:100%">Simpan Pengaturan</button></div>
+<div class="card"><b>🌐 Data Online</b>
+<div class="field"><label>CoinGecko Demo API Key</label><input id="apiKey" type="password" placeholder="Tempel API key di sini"></div>
+<button class="btn secondary" id="testApi" style="width:100%">🔌 Tes Koneksi</button>
+<div class="row"><span>Status</span><b id="apiStatus" class="yellow">Belum dites</b></div>
+<div class="notice">API key hanya disimpan di browser perangkat ini, bukan di GitHub. Jangan memasukkan key ke source code. CoinGecko Demo saat ini gratis dengan 10.000 call/bulan dan 100 call/menit. cite tidak ditampilkan di aplikasi</div>
+</div>
+<div class="card"><b>🔐 AI Cloud</b><div class="row"><span>Status</span><b>Belum aktif</b></div><div class="notice">Kita aktifkan setelah market + berita stabil. Ini mencegah banyak sumber error sekaligus.</div></div>
 </section>
 </main>
-
-<nav><div class="nav">
-<button type="button" class="active" data-target="home"><span class="navicon">⌂</span>Beranda</button>
-<button type="button" data-target="analyze"><span class="navicon">◉</span>Analisis</button>
-<button type="button" data-target="portfolio"><span class="navicon">▣</span>Portfolio</button>
-<button type="button" data-target="settings"><span class="navicon">⚙</span>Pengaturan</button>
-</div></nav>
+<nav><div class="nav"><button class="active" data-target="home"><span class="navicon">⌂</span>Beranda</button><button data-target="analyze"><span class="navicon">◉</span>Analisis</button><button data-target="portfolio"><span class="navicon">▣</span>Portfolio</button><button data-target="settings"><span class="navicon">⚙</span>Pengaturan</button></div></nav>
 </div>
-
 <script>
 (function(){
 "use strict";
-const KEY="cryptoAnalyzerV21";
-let data;
-try{data=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){data=null}
-if(!data)data={capital:5000000,target:5000000,loss:50000,history:[]};
-function rp(n){return "Rp"+Number(n||0).toLocaleString("id-ID")}
+const KEY="cryptoAnalyzerV3";
+let data; try{data=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){data=null}
+if(!data)data={capital:5000000,target:5000000,loss:50000,history:[],apiKey:""};
 function save(){localStorage.setItem(KEY,JSON.stringify(data))}
-function showPage(id){
- document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.dataset.page===id));
- document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));
- window.scrollTo(0,0);
+function rp(n){return "Rp"+Number(n||0).toLocaleString("id-ID")}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.dataset.page===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo(0,0)}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();showPage(b.dataset.target)}));
+document.getElementById("apiKey").value=data.apiKey||"";
+document.getElementById("apiKey").addEventListener("input",e=>{data.apiKey=e.target.value.trim();save()});
+async function cg(path){
+ if(!data.apiKey)throw new Error("API key belum diisi.");
+ const sep=path.includes("?")?"&":"?";
+ const r=await fetch("https://api.coingecko.com/api/v3"+path+sep+"x_cg_demo_api_key="+encodeURIComponent(data.apiKey),{headers:{"accept":"application/json"}});
+ if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();if(j.error)msg=j.error;if(j.status&&j.status.error_message)msg=j.status.error_message}catch(e){}throw new Error(msg)}
+ return r.json();
 }
-document.querySelectorAll(".nav button").forEach(btn=>{
- btn.addEventListener("click",function(ev){ev.preventDefault();ev.stopPropagation();showPage(this.dataset.target);});
-});
-document.getElementById("analyzeBtn").addEventListener("click",()=>showPage("analyze"));
-document.getElementById("scanBtn").addEventListener("click",()=>{
- const coins=[["BTC","Bitcoin",88,"green"],["ETH","Ethereum",84,"green"],["SOL","Solana",81,"green"],["XRP","XRP",76,"yellow"],["BNB","BNB",72,"yellow"]];
- document.getElementById("watch").innerHTML=coins.map(c=>`<div class="coin"><div class="left"><div class="icon">${c[0][0]}</div><div><b>${c[0]}</b><div class="muted">${c[1]} • kandidat demo</div></div></div><b class="${c[3]}">${c[2]}/100</b></div>`).join("");
- document.getElementById("scanStatus").textContent="Demo lokal";
-});
-document.getElementById("shot").addEventListener("change",function(){
- const f=this.files&&this.files[0];if(!f)return;const img=document.getElementById("preview");img.src=URL.createObjectURL(f);img.style.display="block";
-});
-document.getElementById("ruleBtn").addEventListener("click",()=>{
- const t=document.getElementById("trend").value,v=document.getElementById("volume").value,m=document.getElementById("market").value;
- let d="WAIT",cls="yellow",reason="Trend/volume belum memberi konfirmasi yang cukup.";
- if(t==="Bullish"&&v==="Meningkat"){d="ENTRY POTENSIAL";cls="green";reason=m==="Futures"?"Setup mendukung, tetapi futures memerlukan leverage rendah dan SL wajib.":"Setup mendukung; spot menjadi pilihan awal yang lebih sederhana."}
- if(t==="Bearish"&&v==="Meningkat"){d="AVOID";cls="red";reason="Tekanan jual meningkat. Jangan mengejar harga."}
- document.getElementById("result").innerHTML=`<div class="decision ${cls}">${d}</div><div class="row"><span>Market</span><b>${m}</b></div><div class="row"><span>Timeframe</span><b>${document.getElementById("tf").value}</b></div><div class="row"><span>Trend</span><b>${t}</b></div><div class="row"><span>Volume</span><b>${v}</b></div><div class="notice">${reason}</div><div class="notice">Ini aturan awal, bukan jaminan profit. Support/resistance/TP/SL otomatis belum aktif.</div>`;
-});
+document.getElementById("testApi").onclick=async()=>{
+ const s=document.getElementById("apiStatus");s.textContent="Mengecek...";s.className="yellow";
+ try{await cg("/ping");s.textContent="TERHUBUNG";s.className="green"}catch(e){s.textContent="GAGAL";s.className="red";alert("Koneksi gagal: "+e.message)}
+};
+document.getElementById("scanBtn").onclick=async()=>{
+ const box=document.getElementById("watch"),st=document.getElementById("scanStatus");box.innerHTML='<div class="empty">Mengambil data market...</div>';st.textContent="Memuat...";
+ try{
+  const coins=await cg("/coins/markets?vs_currency=idr&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h");
+  const ranked=coins.map(c=>{
+   const ch=Number(c.price_change_percentage_24h||0),vol=Number(c.total_volume||0),cap=Number(c.market_cap||0);
+   const vr=cap?vol/cap:0; let score=50+Math.max(-20,Math.min(20,ch*2))+Math.max(0,Math.min(20,vr*100));
+   score=Math.round(Math.max(0,Math.min(100,score)));
+   return {...c,score};
+  }).sort((a,b)=>b.score-a.score).slice(0,10);
+  box.innerHTML=ranked.map(c=>{const ch=Number(c.price_change_percentage_24h||0);return `<div class="coin"><div class="left"><div class="icon">${(c.symbol||"?").slice(0,1).toUpperCase()}</div><div><b>${(c.symbol||"").toUpperCase()} • ${c.name}</b><div class="muted">${rp(c.current_price)} • 24h ${ch.toFixed(2)}%</div></div></div><div><b class="${c.score>=70?"green":c.score>=55?"yellow":"red"}">${c.score}/100</b><div class="muted">pantau</div></div></div>`}).join("");
+  st.textContent="Live market"; 
+ }catch(e){box.innerHTML='<div class="empty">Gagal mengambil data. Periksa API key dan koneksi internet.</div>';st.textContent="Gagal";alert("Scan gagal: "+e.message)}
+};
+async function loadNews(){
+ const box=document.getElementById("news"),st=document.getElementById("newsStatus");box.innerHTML='<div class="empty">Memuat berita...</div>';st.textContent="Memuat...";
+ try{
+  const items=await cg("/news?per_page=10&page=1");
+  const arr=Array.isArray(items)?items:(items.data||[]);
+  if(!arr.length){box.innerHTML='<div class="empty">Belum ada berita dari API.</div>'}else{
+   box.innerHTML=arr.map(n=>`<div class="news"><a href="${n.url||"#"}" target="_blank" rel="noopener">${escapeHtml(n.title||"Tanpa judul")}</a><small>${escapeHtml(n.source_name||"Sumber tidak diketahui")} • ${n.posted_at?new Date(n.posted_at).toLocaleString("id-ID"):""}</small></div>`).join("");
+  }
+  st.textContent="Live"; 
+ }catch(e){box.innerHTML='<div class="empty">Berita gagal dimuat. Periksa API key.</div>';st.textContent="Gagal";alert("Berita gagal: "+e.message)}
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+document.getElementById("newsBtn").onclick=loadNews;
+document.getElementById("shot").addEventListener("change",function(){const f=this.files&&this.files[0];if(!f)return;const img=document.getElementById("preview");img.src=URL.createObjectURL(f);img.style.display="block"});
+document.getElementById("ruleBtn").onclick=()=>{
+ const t=document.getElementById("trend").value,v=document.getElementById("volume").value,m=document.getElementById("market").value;let d="WAIT",cls="yellow",r="Belum ada konfirmasi cukup.";
+ if(t==="Bullish"&&v==="Meningkat"){d="ENTRY POTENSIAL";cls="green";r=m==="Futures"?"Setup mendukung, tetapi leverage rendah dan SL wajib.":"Setup mendukung; spot menjadi pilihan awal yang lebih sederhana."}
+ if(t==="Bearish"&&v==="Meningkat"){d="AVOID";cls="red";r="Tekanan jual meningkat. Jangan mengejar harga."}
+ document.getElementById("result").innerHTML=`<div class="decision ${cls}">${d}</div><div class="row"><span>Market</span><b>${m}</b></div><div class="row"><span>Timeframe</span><b>${document.getElementById("tf").value}</b></div><div class="row"><span>Trend</span><b>${t}</b></div><div class="row"><span>Volume</span><b>${v}</b></div><div class="notice">${r}</div><div class="notice">Ini aturan awal, bukan jaminan profit. TP/SL otomatis dan AI belum aktif.</div>`;
+};
 function render(){
  document.getElementById("capitalText").textContent=rp(data.capital);document.getElementById("targetText").textContent=rp(data.target);document.getElementById("lossText").textContent=rp(data.loss);document.getElementById("lossGuard").textContent=rp(data.loss);
- document.getElementById("pCapital").textContent=rp(data.capital);document.getElementById("pTarget").textContent=rp(data.target);
- document.getElementById("capitalInput").value=data.capital;document.getElementById("targetInput").value=data.target;document.getElementById("lossInput").value=data.loss;
- const today=new Date().toISOString().slice(0,10), profit=data.history.filter(x=>x.date===today).reduce((s,x)=>s+x.result,0);
- document.getElementById("profitToday").textContent=rp(profit);document.getElementById("pProfit").textContent=rp(profit);
- const g=document.getElementById("guard");g.textContent=profit<=-data.loss?"STOP TRADING":profit>=data.target/20?"TARGET HARI INI":"SIAP";g.className=profit<=-data.loss?"red":profit>=data.target/20?"green":"yellow";
- const h=document.getElementById("history");h.innerHTML=data.history.length?data.history.slice(0,30).map(x=>`<div class="history"><div style="display:flex;justify-content:space-between"><b>${x.coin}</b><b class="${x.result>=0?"green":"red"}">${x.result>=0?"+":""}${rp(x.result)}</b></div><div class="muted">${x.date}</div></div>`).join(""):'<div class="empty">Belum ada trade.</div>';
+ document.getElementById("pCapital").textContent=rp(data.capital);document.getElementById("pTarget").textContent=rp(data.target);document.getElementById("capitalInput").value=data.capital;document.getElementById("targetInput").value=data.target;document.getElementById("lossInput").value=data.loss;
+ const today=new Date().toISOString().slice(0,10),p=data.history.filter(x=>x.date===today).reduce((s,x)=>s+x.result,0);document.getElementById("profitToday").textContent=rp(p);document.getElementById("pProfit").textContent=rp(p);
+ const g=document.getElementById("guard");g.textContent=p<=-data.loss?"STOP TRADING":p>=data.target/20?"TARGET HARI INI":"SIAP";g.className=p<=-data.loss?"red":p>=data.target/20?"green":"yellow";
+ document.getElementById("history").innerHTML=data.history.length?data.history.slice(0,30).map(x=>`<div class="history"><div style="display:flex;justify-content:space-between"><b>${x.coin}</b><b class="${x.result>=0?"green":"red"}">${x.result>=0?"+":""}${rp(x.result)}</b></div><div class="muted">${x.date}</div></div>`).join(""):'<div class="empty">Belum ada trade.</div>';
 }
-document.getElementById("saveTrade").addEventListener("click",()=>{
- const coin=document.getElementById("tradeCoin").value.trim().toUpperCase(),result=Number(document.getElementById("tradeResult").value);
- if(!coin||!Number.isFinite(result)){alert("Isi coin dan profit/loss.");return}
- data.history.unshift({date:new Date().toISOString().slice(0,10),coin,result});save();document.getElementById("tradeCoin").value="";document.getElementById("tradeResult").value="";render();alert("Trade tersimpan.");
-});
-document.getElementById("clearHistory").addEventListener("click",()=>{if(confirm("Hapus semua riwayat?")){data.history=[];save();render()}});
-document.getElementById("saveSettings").addEventListener("click",()=>{
- data.capital=Math.max(0,Number(document.getElementById("capitalInput").value)||0);data.target=Math.max(0,Number(document.getElementById("targetInput").value)||0);data.loss=Math.max(0,Number(document.getElementById("lossInput").value)||0);save();render();alert("Pengaturan tersimpan.");
-});
+document.getElementById("saveTrade").onclick=()=>{const coin=document.getElementById("tradeCoin").value.trim().toUpperCase(),r=Number(document.getElementById("tradeResult").value);if(!coin||!Number.isFinite(r)){alert("Isi coin dan profit/loss.");return}data.history.unshift({date:new Date().toISOString().slice(0,10),coin,result:r});save();render();alert("Trade tersimpan.")};
+document.getElementById("clearHistory").onclick=()=>{if(confirm("Hapus semua riwayat?")){data.history=[];save();render()}};
+document.getElementById("saveSettings").onclick=()=>{data.capital=Math.max(0,Number(document.getElementById("capitalInput").value)||0);data.target=Math.max(0,Number(document.getElementById("targetInput").value)||0);data.loss=Math.max(0,Number(document.getElementById("lossInput").value)||0);save();render();alert("Pengaturan tersimpan.")};
 render();
 })();
 </script>
