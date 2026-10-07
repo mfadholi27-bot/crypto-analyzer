@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V6.1</title>
+<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V7</title>
 <style>
 :root{--bg:#0e1014;--card:#181b20;--card2:#20242a;--line:#303640;--text:#f5f6f7;--muted:#9da4ae;--green:#39c77a;--yellow:#f2c94c;--red:#ef5350;--blue:#8f9aff}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -30,7 +30,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 </head>
 <body>
 <div class="app">
-<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V6.1 • ONLINE</div></div></header>
+<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V7 • ONLINE</div></div></header>
 <main>
 <section class="page active" data-page="home">
 <div class="card hero"><div class="muted">Modal trading</div><div class="money" id="capitalText">Rp5.000.000</div><div class="grid"><div class="mini"><span class="muted">Target bulan</span><b id="targetText">Rp5.000.000</b></div><div class="mini"><span class="muted">Batas rugi/hari</span><b id="lossText">Rp50.000</b></div></div></div>
@@ -42,10 +42,16 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 </section>
 
 <section class="page" data-page="analyze">
-<div class="card"><div class="title"><b>📸 Screenshot Analyzer</b><span class="muted">Pintu</span></div><div class="upload"><label for="shot" class="btn secondary">Pilih Screenshot Pintu</label><input id="shot" type="file" accept="image/*"><img id="preview" class="preview"><div class="notice">Pastikan pair, timeframe, harga dan chart terlihat. Analisis screenshot saat ini masih berbasis input manual. AI Cloud kita tambahkan setelah fondasi stabil.</div></div></div>
+<div class="card"><div class="title"><b>📸 Screenshot Analyzer</b><span class="muted">Pintu</span></div><div class="upload"><label for="shot" class="btn secondary">Pilih Screenshot Pintu</label><input id="shot" type="file" accept="image/*"><img id="preview" class="preview"><div class="notice">Pastikan pair, timeframe, harga dan chart terlihat. Screenshot digunakan sebagai referensi. Data chart diisi manual agar aplikasi tidak menebak harga/timeframe yang tidak terbaca.</div></div></div>
 <div class="card"><b>🧠 Analisis awal</b><div class="formgrid"><div class="field"><label>Market</label><select id="market"><option>Spot</option><option>Futures</option></select></div><div class="field"><label>Timeframe</label><select id="tf"><option>15m</option><option>1m</option><option>1H</option><option>4H</option><option>1D</option></select></div></div><div class="formgrid"><div class="field"><label>Trend</label><select id="trend"><option>Sideways</option><option>Bullish</option><option>Bearish</option></select></div><div class="field"><label>Volume</label><select id="volume"><option>Normal</option><option>Meningkat</option><option>Menurun</option></select></div></div><button class="btn primary" id="ruleBtn" style="width:100%">🧠 Jalankan Analisis</button></div>
 <div class="card"><b>🧮 Kalkulator Risiko</b><div class="formgrid"><div class="field"><label>Modal (Rp)</label><input id="riskCapital" type="number" value="5000000"></div><div class="field"><label>Risiko per trade (%)</label><input id="riskPct" type="number" value="0.5" step="0.1" min="0.1" max="5"></div></div><div class="formgrid"><div class="field"><label>Harga Entry</label><input id="entryPrice" type="number" placeholder="85000"></div><div class="field"><label>Harga Stop Loss</label><input id="slPrice" type="number" placeholder="84000"></div></div><div class="formgrid"><div class="field"><label>Target Profit</label><input id="tpPrice" type="number" placeholder="87000"></div><div class="field"><label>Leverage (Futures)</label><input id="leverage" type="number" value="1" min="1" max="5"></div></div><button class="btn secondary" id="riskBtn" style="width:100%">🧮 Hitung Risiko</button><div id="riskResult" class="calc"><div class="muted">Isi Entry, SL, dan TP untuk menghitung ukuran posisi dan R:R.</div></div><div class="notice">Perhitungan ini hanya membantu mengatur risiko. Untuk modal kecil, Spot tetap menjadi pilihan awal yang lebih sederhana. Futures tetap berisiko tinggi; leverage tidak memperbesar batas risiko yang direncanakan, tetapi dapat mempercepat likuidasi jika pengelolaan posisi buruk.</div></div>
+<div class="card"><b>🧩 Data Chart</b><div class="notice">Upload screenshot Pintu sebagai referensi, lalu isi data yang terlihat pada chart. V7 tidak mengarang harga atau timeframe yang tidak terbaca.</div>
+<div class="formgrid"><div class="field"><label>Pair / Coin</label><input id="pair" placeholder="BTC/IDR atau BTCUSDT"></div><div class="field"><label>Arah</label><select id="direction"><option value="long">LONG / BUY</option><option value="short">SHORT / SELL</option></select></div></div>
+<div class="formgrid"><div class="field"><label>Harga sekarang</label><input id="chartPrice" type="number" placeholder="85000000"></div><div class="field"><label>Support</label><input id="support" type="number" placeholder="84000000"></div></div>
+<div class="formgrid"><div class="field"><label>Resistance</label><input id="resistance" type="number" placeholder="87000000"></div><div class="field"><label>Keyakinan data (%)</label><input id="dataConfidence" type="number" value="80" min="0" max="100"></div></div>
+<button class="btn primary" id="planBtn" style="width:100%">🎯 Buat Trade Plan</button></div>
 <div class="card"><b>Hasil Analisis</b><div id="result"><div class="decision yellow">🟡 WAIT</div><div class="muted">Belum ada analisis.</div></div></div>
+<div class="card"><b>🤖 AI Cloud</b><div class="row"><span>Status</span><b class="yellow">BELUM TERHUBUNG</b></div><div class="notice">V7 menyiapkan struktur analisis screenshot tanpa mengirim gambar ke server. AI Cloud dapat ditambahkan nanti melalui backend agar API key tidak diletakkan di GitHub.</div></div>
 </section>
 
 <section class="page" data-page="portfolio">
@@ -72,7 +78,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 <script>
 (function(){
 "use strict";
-const KEY="cryptoAnalyzerV6";
+const KEY="cryptoAnalyzerV7";
 let data; try{data=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){data=null}
 if(!data)data={capital:5000000,target:5000000,dailyTarget:50000,loss:50000,history:[],apiKey:""};
 if(typeof data.dailyTarget!=="number")data.dailyTarget=50000;
@@ -184,6 +190,29 @@ document.getElementById("ruleBtn").onclick=()=>{
  if(t==="Bullish"&&v==="Meningkat"){d="ENTRY POTENSIAL";cls="green";r=m==="Futures"?"Setup mendukung, tetapi leverage rendah dan SL wajib.":"Setup mendukung; spot menjadi pilihan awal yang lebih sederhana."}
  if(t==="Bearish"&&v==="Meningkat"){d="AVOID";cls="red";r="Tekanan jual meningkat. Jangan mengejar harga."}
  document.getElementById("result").innerHTML=`<div class="decision ${cls}">${d}</div><div class="row"><span>Market</span><b>${m}</b></div><div class="row"><span>Timeframe</span><b>${document.getElementById("tf").value}</b></div><div class="row"><span>Trend</span><b>${t}</b></div><div class="row"><span>Volume</span><b>${v}</b></div><div class="notice">${r}</div><div class="notice">Ini aturan awal, bukan jaminan profit. TP/SL otomatis dan AI belum aktif.</div>`;
+};
+document.getElementById("planBtn").onclick=()=>{
+ const pair=document.getElementById("pair").value.trim().toUpperCase()||"PAIR";
+ const market=document.getElementById("market").value, tf=document.getElementById("tf").value, trend=document.getElementById("trend").value, volume=document.getElementById("volume").value;
+ const dir=document.getElementById("direction").value, price=Number(document.getElementById("chartPrice").value), support=Number(document.getElementById("support").value), resistance=Number(document.getElementById("resistance").value), conf=Math.max(0,Math.min(100,Number(document.getElementById("dataConfidence").value)||0));
+ const out=document.getElementById("result");
+ if(!price||price<=0||!support||!resistance||support<=0||resistance<=0||support>=resistance){out.innerHTML='<div class="decision red">🔴 AVOID / DATA TIDAK VALID</div><div class="notice">Isi harga, support, dan resistance dengan benar. Support harus lebih rendah daripada resistance.</div>';return}
+ if(price<=support || price>=resistance){out.innerHTML='<div class="decision yellow">🟡 WAIT</div><div class="notice">Harga berada di luar/tepat pada batas area yang dimasukkan. Tunggu konfirmasi berikutnya.</div>';return}
+ const range=resistance-support, riskPct=Math.abs(price-support)/price*100;
+ let entry,sl,tp1,tp2,action="WAIT",reason=[];
+ if(dir==="long"){
+  entry=Math.max(support,price-range*0.10); sl=support-range*0.08; tp1=price+range*0.45; tp2=price+range*0.80;
+  if(trend==="Bullish"&&volume!=="Menurun"&&price<resistance*0.985){action="WATCH LONG";reason.push("trend mendukung");} else reason.push("butuh konfirmasi bullish/volume");
+ }else{
+  entry=Math.min(resistance,price+range*0.10); sl=resistance+range*0.08; tp1=price-range*0.45; tp2=price-range*0.80;
+  if(market==="Futures"&&trend==="Bearish"&&volume!=="Menurun"&&price>support*1.015){action="WATCH SHORT";reason.push("trend bearish mendukung");} else reason.push("butuh konfirmasi bearish dan futures");
+ }
+ const rr1=Math.abs(tp1-entry)/Math.abs(entry-sl), rr2=Math.abs(tp2-entry)/Math.abs(entry-sl);
+ if(market==="Spot"&&dir==="short"){action="AVOID";reason=["Spot tidak digunakan untuk short"]}
+ if(conf<60){action="WAIT";reason=["data chart belum cukup yakin"]}
+ if(riskPct>3){action="WAIT";reason.push("jarak risiko relatif besar")}
+ const cls=action.startsWith("WATCH")?"green":action==="AVOID"?"red":"yellow";
+ out.innerHTML=`<div class="decision ${cls}">${action}</div><div class="row"><span>Pair</span><b>${escapeHtml(pair)}</b></div><div class="row"><span>Market / TF</span><b>${market} • ${tf}</b></div><div class="row"><span>Entry acuan</span><b>${entry.toLocaleString('id-ID')}</b></div><div class="row"><span>Stop Loss</span><b class="red">${sl.toLocaleString('id-ID')}</b></div><div class="row"><span>TP1</span><b class="green">${tp1.toLocaleString('id-ID')}</b></div><div class="row"><span>TP2</span><b class="green">${tp2.toLocaleString('id-ID')}</b></div><div class="row"><span>R:R TP1 / TP2</span><b>1 : ${rr1.toFixed(2)} / 1 : ${rr2.toFixed(2)}</b></div><div class="row"><span>Keyakinan data</span><b>${conf}%</b></div><div class="notice">Alasan: ${escapeHtml(reason.join('; '))}. Level di atas adalah rencana berbasis input support/resistance, bukan sinyal pasti. Jangan entry hanya karena aplikasi memberi WATCH.</div>`;
 };
 document.getElementById("riskBtn").onclick=()=>{
  const capital=Number(document.getElementById("riskCapital").value)||0,pct=Number(document.getElementById("riskPct").value)||0.5,entry=Number(document.getElementById("entryPrice").value)||0,sl=Number(document.getElementById("slPrice").value)||0,tp=Number(document.getElementById("tpPrice").value)||0,lev=Math.max(1,Number(document.getElementById("leverage").value)||1);
