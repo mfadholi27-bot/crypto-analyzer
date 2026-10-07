@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V6</title>
+<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V6.1</title>
 <style>
 :root{--bg:#0e1014;--card:#181b20;--card2:#20242a;--line:#303640;--text:#f5f6f7;--muted:#9da4ae;--green:#39c77a;--yellow:#f2c94c;--red:#ef5350;--blue:#8f9aff}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -30,11 +30,12 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 </head>
 <body>
 <div class="app">
-<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V6 • ONLINE</div></div></header>
+<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V6.1 • ONLINE</div></div></header>
 <main>
 <section class="page active" data-page="home">
 <div class="card hero"><div class="muted">Modal trading</div><div class="money" id="capitalText">Rp5.000.000</div><div class="grid"><div class="mini"><span class="muted">Target bulan</span><b id="targetText">Rp5.000.000</b></div><div class="mini"><span class="muted">Batas rugi/hari</span><b id="lossText">Rp50.000</b></div></div></div>
 <div class="actions"><button class="btn primary" id="scanBtn">🔎 Scan Market</button><button class="btn secondary" id="newsBtn">📰 Berita</button></div>
+<div class="card"><div class="title"><b>🧭 Decision Center</b><span class="muted" id="decisionStatus">Belum scan</span></div><div class="grid"><div class="mini"><span class="muted">Kondisi BTC</span><b id="btcRegime">-</b></div><div class="mini"><span class="muted">Kandidat terbaik</span><b id="bestCoin">-</b></div></div><div class="decision yellow" id="marketDecision">WAIT</div><div class="muted" id="decisionNote">Tekan Scan Market untuk memperbarui kondisi pasar.</div></div>
 <div class="card"><div class="title"><b>⭐ Coin untuk Dipantau</b><span class="muted" id="scanStatus">Belum scan</span></div><div id="watch"><div class="empty">Masukkan API key gratis di Pengaturan, lalu Scan Market.</div></div><div class="notice">Skor hanya alat penyaringan awal berdasarkan momentum, likuiditas, dan kestabilan perubahan 24 jam. Bukan sinyal beli/jual dan bukan jaminan profit.</div></div>
 <div class="card"><div class="title"><b>📰 Berita terbaru</b><span class="muted" id="newsStatus">Belum dimuat</span></div><div id="news"><div class="empty">Tekan Berita untuk memuat berita.</div></div></div>
 <div class="card"><div class="title"><b>🛡️ Daily Guard</b><b class="yellow" id="guard">SIAP</b></div><div class="row"><span>Profit hari ini</span><b id="profitToday">Rp0</b></div><div class="row"><span>Batas rugi</span><b id="lossGuard">Rp50.000</b></div></div>
@@ -114,14 +115,13 @@ document.getElementById("scanBtn").onclick=async()=>{
   }).sort((a,b)=>b.score-a.score).slice(0,10);
   box.innerHTML=ranked.map(c=>{const ch=Number(c.price_change_percentage_24h||0);return `<div class="coin"><div class="left"><div class="icon">${(c.symbol||"?").slice(0,1).toUpperCase()}</div><div><b>${(c.symbol||"").toUpperCase()} • ${c.name}</b><div class="muted">${rp(c.current_price)} • 24h ${ch.toFixed(2)}% • Vol/Cap ${(c.vr*100).toFixed(1)}%</div></div></div><div><b class="${c.score>=70?"green":c.score>=55?"yellow":"red"}">${c.score}/100</b><div class="muted">${c.action}</div></div></div>`}).join("");
   st.textContent=`100 koin • BTC ${regime} (${btcCh.toFixed(2)}%)`;
-  document.getElementById("btcRegime").textContent=regime+` (${btcCh.toFixed(2)}%)`;
-  document.getElementById("btcRegime").className=regime==="BULLISH"?"green":regime==="DEFENSIVE"?"red":"yellow";
+  const btcEl=document.getElementById("btcRegime"); if(btcEl){btcEl.textContent=regime+` (${btcCh.toFixed(2)}%)`;btcEl.className=regime==="BULLISH"?"green":regime==="DEFENSIVE"?"red":"yellow";}
   const best=ranked[0];
-  document.getElementById("bestCoin").textContent=best?`${best.symbol.toUpperCase()} ${best.score}/100`:"-";
+  const bestEl=document.getElementById("bestCoin"); if(bestEl)bestEl.textContent=best?`${best.symbol.toUpperCase()} ${best.score}/100`:"-";
   const decision=regime==="DEFENSIVE"?"WAIT / AVOID":"WAIT";
-  const d=document.getElementById("marketDecision");d.textContent=decision;d.className=regime==="DEFENSIVE"?"red":"yellow";
-  document.getElementById("decisionStatus").textContent="Diperbarui";
-  document.getElementById("decisionNote").textContent=regime==="DEFENSIVE"?"BTC sedang defensif. Hindari mengejar altcoin dan jangan memaksa entry. Tunggu kondisi membaik.":best?`Kandidat ${best.symbol.toUpperCase()} hanya masuk watchlist. Konfirmasi chart, timeframe, volume, entry, dan SL tetap wajib sebelum trade.`:"Belum ada kandidat kuat.";
+  const d=document.getElementById("marketDecision"); if(d){d.textContent=decision;d.className=regime==="DEFENSIVE"?"decision red":"decision yellow";}
+  const ds=document.getElementById("decisionStatus"); if(ds)ds.textContent="Diperbarui";
+  const dn=document.getElementById("decisionNote"); if(dn)dn.textContent=regime==="DEFENSIVE"?"BTC sedang defensif. Hindari mengejar altcoin dan jangan memaksa entry. Tunggu kondisi membaik.":best?`Kandidat ${best.symbol.toUpperCase()} hanya masuk watchlist. Konfirmasi chart, timeframe, volume, entry, dan SL tetap wajib sebelum trade.`:"Belum ada kandidat kuat.";
  }catch(e){box.innerHTML='<div class="empty">Gagal mengambil data. Periksa API key dan koneksi internet.</div>';st.textContent="Gagal";alert("Scan gagal: "+e.message)}
 };
 async function translateId(text){
