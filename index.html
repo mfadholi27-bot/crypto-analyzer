@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V5</title>
+<meta name="theme-color" content="#0e1014"><title>Crypto Analyzer V6</title>
 <style>
 :root{--bg:#0e1014;--card:#181b20;--card2:#20242a;--line:#303640;--text:#f5f6f7;--muted:#9da4ae;--green:#39c77a;--yellow:#f2c94c;--red:#ef5350;--blue:#8f9aff}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -30,7 +30,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 </head>
 <body>
 <div class="app">
-<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V5 • ONLINE</div></div></header>
+<header><div class="top"><div><div class="brand">Crypto Analyzer</div><div class="muted">Personal • Pintu Spot/Futures</div></div><div class="badge">V6 • ONLINE</div></div></header>
 <main>
 <section class="page active" data-page="home">
 <div class="card hero"><div class="muted">Modal trading</div><div class="money" id="capitalText">Rp5.000.000</div><div class="grid"><div class="mini"><span class="muted">Target bulan</span><b id="targetText">Rp5.000.000</b></div><div class="mini"><span class="muted">Batas rugi/hari</span><b id="lossText">Rp50.000</b></div></div></div>
@@ -43,7 +43,7 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 <section class="page" data-page="analyze">
 <div class="card"><div class="title"><b>📸 Screenshot Analyzer</b><span class="muted">Pintu</span></div><div class="upload"><label for="shot" class="btn secondary">Pilih Screenshot Pintu</label><input id="shot" type="file" accept="image/*"><img id="preview" class="preview"><div class="notice">Pastikan pair, timeframe, harga dan chart terlihat. Analisis screenshot saat ini masih berbasis input manual. AI Cloud kita tambahkan setelah fondasi stabil.</div></div></div>
 <div class="card"><b>🧠 Analisis awal</b><div class="formgrid"><div class="field"><label>Market</label><select id="market"><option>Spot</option><option>Futures</option></select></div><div class="field"><label>Timeframe</label><select id="tf"><option>15m</option><option>1m</option><option>1H</option><option>4H</option><option>1D</option></select></div></div><div class="formgrid"><div class="field"><label>Trend</label><select id="trend"><option>Sideways</option><option>Bullish</option><option>Bearish</option></select></div><div class="field"><label>Volume</label><select id="volume"><option>Normal</option><option>Meningkat</option><option>Menurun</option></select></div></div><button class="btn primary" id="ruleBtn" style="width:100%">🧠 Jalankan Analisis</button></div>
-<div class="card"><b>🧮 Kalkulator Risiko</b><div class="formgrid"><div class="field"><label>Modal (Rp)</label><input id="riskCapital" type="number" value="5000000"></div><div class="field"><label>Risiko per trade (%)</label><input id="riskPct" type="number" value="0.5" step="0.1" min="0.1" max="5"></div></div><div class="formgrid"><div class="field"><label>Harga Entry</label><input id="entryPrice" type="number" placeholder="85000"></div><div class="field"><label>Harga Stop Loss</label><input id="slPrice" type="number" placeholder="84000"></div></div><div class="formgrid"><div class="field"><label>Target Profit</label><input id="tpPrice" type="number" placeholder="87000"></div><div class="field"><label>Leverage (Futures)</label><input id="leverage" type="number" value="1" min="1" max="5"></div></div><button class="btn secondary" id="riskBtn" style="width:100%">🧮 Hitung Risiko</button><div id="riskResult" class="calc"><div class="muted">Isi Entry, SL, dan TP untuk menghitung ukuran posisi dan R:R.</div></div><div class="notice">Perhitungan ini hanya membantu mengatur risiko. Futures tetap berisiko tinggi; leverage tidak memperbesar batas risiko yang direncanakan, tetapi dapat mempercepat likuidasi jika pengelolaan posisi buruk.</div></div>
+<div class="card"><b>🧮 Kalkulator Risiko</b><div class="formgrid"><div class="field"><label>Modal (Rp)</label><input id="riskCapital" type="number" value="5000000"></div><div class="field"><label>Risiko per trade (%)</label><input id="riskPct" type="number" value="0.5" step="0.1" min="0.1" max="5"></div></div><div class="formgrid"><div class="field"><label>Harga Entry</label><input id="entryPrice" type="number" placeholder="85000"></div><div class="field"><label>Harga Stop Loss</label><input id="slPrice" type="number" placeholder="84000"></div></div><div class="formgrid"><div class="field"><label>Target Profit</label><input id="tpPrice" type="number" placeholder="87000"></div><div class="field"><label>Leverage (Futures)</label><input id="leverage" type="number" value="1" min="1" max="5"></div></div><button class="btn secondary" id="riskBtn" style="width:100%">🧮 Hitung Risiko</button><div id="riskResult" class="calc"><div class="muted">Isi Entry, SL, dan TP untuk menghitung ukuran posisi dan R:R.</div></div><div class="notice">Perhitungan ini hanya membantu mengatur risiko. Untuk modal kecil, Spot tetap menjadi pilihan awal yang lebih sederhana. Futures tetap berisiko tinggi; leverage tidak memperbesar batas risiko yang direncanakan, tetapi dapat mempercepat likuidasi jika pengelolaan posisi buruk.</div></div>
 <div class="card"><b>Hasil Analisis</b><div id="result"><div class="decision yellow">🟡 WAIT</div><div class="muted">Belum ada analisis.</div></div></div>
 </section>
 
@@ -55,13 +55,14 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 
 <section class="page" data-page="settings">
 <div class="card"><b>⚙️ Pengaturan</b>
-<div class="field"><label>Modal awal (Rp)</label><input id="capitalInput" type="number"></div><div class="field"><label>Target bulanan (Rp)</label><input id="targetInput" type="number"></div><div class="field"><label>Batas rugi harian (Rp)</label><input id="lossInput" type="number"></div><button class="btn primary" id="saveSettings" style="width:100%">Simpan Pengaturan</button></div>
+<div class="field"><label>Modal awal (Rp)</label><input id="capitalInput" type="number"></div><div class="field"><label>Target bulanan (Rp)</label><input id="targetInput" type="number"></div><div class="field"><label>Batas rugi harian (Rp)</label><input id="lossInput" type="number"></div><div class="field"><label>Target harian (Rp)</label><input id="dailyTargetInput" type="number"></div><button class="btn primary" id="saveSettings" style="width:100%">Simpan Pengaturan</button></div>
 <div class="card"><b>🌐 Data Online</b>
 <div class="field"><label>CoinGecko Demo API Key</label><input id="apiKey" type="password" placeholder="Tempel API key di sini"></div>
 <button class="btn secondary" id="testApi" style="width:100%">🔌 Tes Koneksi</button>
 <div class="row"><span>Status</span><b id="apiStatus" class="yellow">Belum dites</b></div>
 <div class="notice">API key hanya disimpan di browser perangkat ini, bukan di GitHub. Jangan memasukkan key ke source code. CoinGecko Demo gratis untuk penggunaan pribadi, dengan kuota dan batas panggilan sesuai paket Demo. API key disimpan di browser perangkat ini.</div>
 </div>
+<div class="card"><b>💰 Rencana Tambah Modal</b><div class="row"><span>Status</span><b id="capitalPlan" class="yellow">TUNGGU</b></div><div class="notice">Aplikasi tidak akan menyuruh menambah modal hanya karena harga naik. Tambah modal sebaiknya dipertimbangkan setelah catatan trade menunjukkan disiplin, batas rugi dipatuhi, dan kebutuhan modal memang jelas.</div></div>
 <div class="card"><b>🔐 AI Cloud</b><div class="row"><span>Status</span><b>Belum aktif</b></div><div class="notice">Belum aktif. V5 memprioritaskan market data, berita Indonesia, sentimen sederhana, dan kalkulator risiko tanpa biaya tambahan.</div></div>
 </section>
 </main>
@@ -70,9 +71,10 @@ nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:#191c21;border
 <script>
 (function(){
 "use strict";
-const KEY="cryptoAnalyzerV4";
+const KEY="cryptoAnalyzerV6";
 let data; try{data=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){data=null}
-if(!data)data={capital:5000000,target:5000000,loss:50000,history:[],apiKey:""};
+if(!data)data={capital:5000000,target:5000000,dailyTarget:50000,loss:50000,history:[],apiKey:""};
+if(typeof data.dailyTarget!=="number")data.dailyTarget=50000;
 function save(){localStorage.setItem(KEY,JSON.stringify(data))}
 function rp(n){return "Rp"+Number(n||0).toLocaleString("id-ID")}
 function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.dataset.page===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));window.scrollTo(0,0)}
@@ -96,20 +98,30 @@ document.getElementById("scanBtn").onclick=async()=>{
   const coins=await cg("/coins/markets?vs_currency=idr&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h");
   const btc=coins.find(c=>c.id==="bitcoin");
   const btcCh=Number(btc?.price_change_percentage_24h||0);
-  const regime=btcCh>1?"BULLISH":btcCh<-1?"DEFENSIVE":"NEUTRAL";
-  const ranked=coins.filter(c=>Number(c.market_cap||0)>0 && Number(c.total_volume||0)>0).map(c=>{
+  const regime=btcCh>1.2?"BULLISH":btcCh<-1.2?"DEFENSIVE":"NEUTRAL";
+  const excluded=["tether","usd-coin","dai","first-digital-usd","true-usd","binance-usd"];
+  const ranked=coins.filter(c=>Number(c.market_cap||0)>0&&Number(c.total_volume||0)>0&&!excluded.includes(c.id)).map(c=>{
    const ch=Number(c.price_change_percentage_24h||0),vol=Number(c.total_volume||0),cap=Number(c.market_cap||0);
-   const vr=cap?vol/cap:0;
-   const momentum=Math.max(-25,Math.min(25,ch*2.5));
-   const liquidity=Math.max(0,Math.min(30,vr*150));
-   const stability=ch>=-8?15:5;
-   const regimeAdj=regime==="DEFENSIVE"&&c.id!=="bitcoin"?-8:regime==="BULLISH"?4:0;
-   const score=Math.round(Math.max(0,Math.min(100,30+momentum+liquidity+stability+regimeAdj)));
-   const action=score>=72&&ch>0?"WATCH":score>=58?"WAIT":"AVOID";
-   return {...c,score,action,vr};
+   const vr=cap?vol/cap:0, hi=Number(c.high_24h||0),lo=Number(c.low_24h||0),px=Number(c.current_price||0);
+   const range=px>0?(hi-lo)/px:0;
+   const momentum=Math.max(-25,Math.min(25,ch*2.4));
+   const liquidity=Math.max(0,Math.min(28,vr*140));
+   const stability=range<0.08?15:range<0.15?10:5;
+   const regimeAdj=regime==="DEFENSIVE"?-5:regime==="BULLISH"?5:0;
+   const score=Math.round(Math.max(0,Math.min(100,32+momentum+liquidity+stability+regimeAdj)));
+   const action=regime==="DEFENSIVE"?"WAIT":(score>=72&&ch>0?"WATCH":score>=58?"WAIT":"AVOID");
+   return {...c,score,action,vr,range};
   }).sort((a,b)=>b.score-a.score).slice(0,10);
-  box.innerHTML=ranked.map(c=>{const ch=Number(c.price_change_percentage_24h||0);return `<div class="coin"><div class="left"><div class="icon">${(c.symbol||"?").slice(0,1).toUpperCase()}</div><div><b>${(c.symbol||"").toUpperCase()} • ${c.name}</b><div class="muted">${rp(c.current_price)} • 24h ${ch.toFixed(2)}%</div></div></div><div><b class="${c.score>=70?"green":c.score>=55?"yellow":"red"}">${c.score}/100</b><div class="muted">${c.action}</div></div></div>`}).join("");
-  st.textContent=`100 koin • BTC ${regime} (${btcCh.toFixed(2)}%)`; 
+  box.innerHTML=ranked.map(c=>{const ch=Number(c.price_change_percentage_24h||0);return `<div class="coin"><div class="left"><div class="icon">${(c.symbol||"?").slice(0,1).toUpperCase()}</div><div><b>${(c.symbol||"").toUpperCase()} • ${c.name}</b><div class="muted">${rp(c.current_price)} • 24h ${ch.toFixed(2)}% • Vol/Cap ${(c.vr*100).toFixed(1)}%</div></div></div><div><b class="${c.score>=70?"green":c.score>=55?"yellow":"red"}">${c.score}/100</b><div class="muted">${c.action}</div></div></div>`}).join("");
+  st.textContent=`100 koin • BTC ${regime} (${btcCh.toFixed(2)}%)`;
+  document.getElementById("btcRegime").textContent=regime+` (${btcCh.toFixed(2)}%)`;
+  document.getElementById("btcRegime").className=regime==="BULLISH"?"green":regime==="DEFENSIVE"?"red":"yellow";
+  const best=ranked[0];
+  document.getElementById("bestCoin").textContent=best?`${best.symbol.toUpperCase()} ${best.score}/100`:"-";
+  const decision=regime==="DEFENSIVE"?"WAIT / AVOID":"WAIT";
+  const d=document.getElementById("marketDecision");d.textContent=decision;d.className=regime==="DEFENSIVE"?"red":"yellow";
+  document.getElementById("decisionStatus").textContent="Diperbarui";
+  document.getElementById("decisionNote").textContent=regime==="DEFENSIVE"?"BTC sedang defensif. Hindari mengejar altcoin dan jangan memaksa entry. Tunggu kondisi membaik.":best?`Kandidat ${best.symbol.toUpperCase()} hanya masuk watchlist. Konfirmasi chart, timeframe, volume, entry, dan SL tetap wajib sebelum trade.`:"Belum ada kandidat kuat.";
  }catch(e){box.innerHTML='<div class="empty">Gagal mengambil data. Periksa API key dan koneksi internet.</div>';st.textContent="Gagal";alert("Scan gagal: "+e.message)}
 };
 async function translateId(text){
@@ -178,20 +190,21 @@ document.getElementById("riskBtn").onclick=()=>{
  const out=document.getElementById("riskResult");
  if(capital<=0||entry<=0||sl<=0||tp<=0||entry===sl){out.innerHTML='<div class="red">Isi modal, entry, SL, dan TP dengan angka yang valid.</div>';return}
  const riskMoney=capital*pct/100,dist=Math.abs(entry-sl),reward=Math.abs(tp-entry),rr=dist?reward/dist:0,qty=riskMoney/dist,notional=qty*entry,margin=notional/lev;
- const direction=tp>entry?"LONG / BUY":"SHORT / SELL";
- const safe=rr>=2&&pct<=1;
+ const direction=sl<entry&&tp>entry?"LONG / BUY":sl>entry&&tp<entry?"SHORT / SELL":"INVALID SETUP";
+ const safe=direction!=="INVALID SETUP"&&rr>=2&&pct<=1;
  out.innerHTML=`<div class="row"><span>Arah</span><b>${direction}</b></div><div class="row"><span>Risiko maksimum</span><b class="red">${rp(riskMoney)}</b></div><div class="row"><span>Jarak SL</span><b>${rp(dist)}</b></div><div class="row"><span>Risk : Reward</span><b class="${rr>=2?"green":"yellow"}">1 : ${rr.toFixed(2)}</b></div><div class="row"><span>Ukuran posisi</span><b>${qty.toFixed(6)}</b></div><div class="row"><span>Nilai posisi</span><b>${rp(notional)}</b></div><div class="row"><span>Estimasi margin @ ${lev}x</span><b>${rp(margin)}</b></div><div class="decision ${safe?"green":"yellow"}" style="font-size:18px">${safe?"SETUP LEBIH TERKONTROL":"REVIEW / WAIT"}</div><div class="notice">Batas risiko dihitung dari modal, bukan dari target profit. Ini bukan rekomendasi entry.</div>`;
 };
 function render(){
- document.getElementById("capitalText").textContent=rp(data.capital);document.getElementById("targetText").textContent=rp(data.target);document.getElementById("lossText").textContent=rp(data.loss);document.getElementById("lossGuard").textContent=rp(data.loss);
+ document.getElementById("capitalText").textContent=rp(data.capital);document.getElementById("targetText").textContent=rp(data.target);document.getElementById("lossText").textContent=rp(data.loss);document.getElementById("lossGuard").textContent=rp(data.loss);document.getElementById("dailyTargetInput").value=data.dailyTarget;
  document.getElementById("pCapital").textContent=rp(data.capital);document.getElementById("pTarget").textContent=rp(data.target);document.getElementById("capitalInput").value=data.capital;document.getElementById("targetInput").value=data.target;document.getElementById("lossInput").value=data.loss;
  const today=new Date().toISOString().slice(0,10),p=data.history.filter(x=>x.date===today).reduce((s,x)=>s+x.result,0);document.getElementById("profitToday").textContent=rp(p);document.getElementById("pProfit").textContent=rp(p);
- const g=document.getElementById("guard");g.textContent=p<=-data.loss?"STOP TRADING":p>=data.target/20?"TARGET HARI INI":"SIAP";g.className=p<=-data.loss?"red":p>=data.target/20?"green":"yellow";
+ const g=document.getElementById("guard");g.textContent=p<=-data.loss?"STOP TRADING":p>=data.dailyTarget?"TARGET HARI INI":"SIAP";g.className=p<=-data.loss?"red":p>=data.dailyTarget?"green":"yellow";
+ const cp=document.getElementById("capitalPlan");if(cp){const total=data.history.length,wins=data.history.filter(x=>x.result>0).length,net=data.history.reduce((a,x)=>a+x.result,0);cp.textContent=(total>=20&&net>0&&wins>=total*0.55)?"BOLEH DIEVALUASI":"TUNGGU";cp.className=(total>=20&&net>0&&wins>=total*0.55)?"green":"yellow";}
  document.getElementById("history").innerHTML=data.history.length?data.history.slice(0,30).map(x=>`<div class="history"><div style="display:flex;justify-content:space-between"><b>${x.coin}</b><b class="${x.result>=0?"green":"red"}">${x.result>=0?"+":""}${rp(x.result)}</b></div><div class="muted">${x.date}</div></div>`).join(""):'<div class="empty">Belum ada trade.</div>';
 }
 document.getElementById("saveTrade").onclick=()=>{const coin=document.getElementById("tradeCoin").value.trim().toUpperCase(),r=Number(document.getElementById("tradeResult").value);if(!coin||!Number.isFinite(r)){alert("Isi coin dan profit/loss.");return}data.history.unshift({date:new Date().toISOString().slice(0,10),coin,result:r});save();render();alert("Trade tersimpan.")};
 document.getElementById("clearHistory").onclick=()=>{if(confirm("Hapus semua riwayat?")){data.history=[];save();render()}};
-document.getElementById("saveSettings").onclick=()=>{data.capital=Math.max(0,Number(document.getElementById("capitalInput").value)||0);data.target=Math.max(0,Number(document.getElementById("targetInput").value)||0);data.loss=Math.max(0,Number(document.getElementById("lossInput").value)||0);save();render();alert("Pengaturan tersimpan.")};
+document.getElementById("saveSettings").onclick=()=>{data.capital=Math.max(0,Number(document.getElementById("capitalInput").value)||0);data.target=Math.max(0,Number(document.getElementById("targetInput").value)||0);data.loss=Math.max(0,Number(document.getElementById("lossInput").value)||0);data.dailyTarget=Math.max(0,Number(document.getElementById("dailyTargetInput").value)||0);save();render();alert("Pengaturan tersimpan.")};
 render();
 })();
 </script>
